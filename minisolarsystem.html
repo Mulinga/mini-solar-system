@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mini Solar System</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            background-color: lime;
+        }
+    </style>
+</head>
+<body>
+    <h1>Calculate Weight of an Object on a Planet</h1>
+    <div class="beau">
+        <input type="text" id="mass" placeholder="Enter the Mass in Kg" /> 
+        <select id="planet">
+            <option value="">Select the Planet</option>
+            <option value="mercury">Mercury</option>
+            <option value="venus">Venus</option>
+            <option value="earth">Earth</option>
+            <option value="mars">Mars</option>
+            <option value="jupiter">Jupiter</option>
+            <option value="saturn">Saturn</option>
+            <option value="uranus">Uranus</option>
+            <option value="neptune">Neptune</option>
+            <option value="pluto">Pluto</option>
+        </select>
+        <button class="calculate">Calculate Weight</button>
+    </div>
+
+    <div id="planetImageContainer"></div> <!-- Container for planet images -->
+    <div id="weightDisplay"></div> <!-- Container for weight display -->
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const button = document.querySelector('.calculate');
+            button.addEventListener('click', (event) => {
+                const mass = parseFloat(document.getElementById('mass').value);
+                const planet = document.getElementById('planet').value;
+                let theWeight;
+                switch (planet) {
+                    case 'mercury':
+                        theWeight = 0.38 * mass;
+                        addPlanetImage("./images/mercury.png", "mercury");
+                        break;
+                    case 'venus':
+                        theWeight = 0.91 * mass;
+                        addPlanetImage("./images/venus.png", "venus");
+                        break;
+                    case 'earth':
+                        theWeight = mass;
+                        addPlanetImage("./images/earth.png", "earth");
+                        break;
+                    case 'mars':
+                        theWeight = 0.38 * mass;
+                        addPlanetImage("./images/mars.png", "mars");
+                        break;
+                    case 'jupiter':
+                        theWeight = 2.34 * mass;
+                        addPlanetImage("./images/jupiter.png", "jupiter");
+                        break;
+                    case 'saturn':
+                        theWeight = 1.06 * mass;
+                        addPlanetImage("./images/saturn.png", "saturn");
+                        break;
+                    case 'uranus':
+                        theWeight = 0.92 * mass;
+                        addPlanetImage("./images/uranus.png", "uranus");
+                        break;
+                    case 'neptune':
+                        theWeight = 1.19 * mass;
+                        addPlanetImage("./images/neptune.png", "neptune");
+                        break;
+                    case 'pluto':
+                        theWeight = 0.06 * mass;
+                        addPlanetImage("./images/pluto.png", "pluto");
+                        break;
+                    default:
+                        alert("Please Select a Planet");
+                }
+                displayWeight(theWeight);
+            });
+        });
+
+        function addPlanetImage(src, alt) {
+            removePlanetImage(); // Clear previous image
+            const planetImage = document.createElement('img');
+            planetImage.src = src;
+            planetImage.alt = alt;
+            document.getElementById('planetImageContainer').appendChild(planetImage);
+        }
+
+        function removePlanetImage() {
+            const planetImageContainer = document.getElementById('planetImageContainer');
+            while (planetImageContainer.firstChild) {
+                planetImageContainer.removeChild(planetImageContainer.firstChild);
+            }
+        }
+
+        function displayWeight(weight) {
+            const weightDisplay = document.getElementById('weightDisplay');
+            weightDisplay.textContent = "The weight is: " + weight.toFixed(2); // Display weight with 2 decimal places
+        }
+    </script>
+</body>
+</html>
